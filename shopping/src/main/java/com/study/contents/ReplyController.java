@@ -27,10 +27,10 @@ public class ReplyController {
 //ReplyController 부분만 변경해서 다른 부트사용하는 파일에서 사용가능
 
   @Autowired
-  @Qualifier("com.study.model.ReplyServiceImpl")
+  @Qualifier("com.study.contents.ReplyServiceImpl")
   private ReplyService service;
   
-  @GetMapping("/contents/reply/list/{contentsno}/{sno}/{eno}")
+  @GetMapping("/contents/review/list/{contentsno}/{sno}/{eno}")
   public ResponseEntity<List<ReplyDTO>> getList(
       @PathVariable("contentsno") int contentsno, 
       @PathVariable("sno") int sno,
@@ -44,22 +44,22 @@ public class ReplyController {
     return new ResponseEntity<List<ReplyDTO>>(service.list(map), HttpStatus.OK);
   }
   
-  @GetMapping("/contents/reply/page")
+  @GetMapping("/contents/review/page")
   public ResponseEntity<String> getPage(
-     int nPage, int nowPage,int bbsno, String col, String word) {
+     int nPage,int contentsno, String col, String word) {
  
-    int total = service.total(bbsno);
-    String url = "/bbs/read/"+bbsno;
+    int total = service.total(contentsno);
+    String url = "/contents/detail/"+contentsno;
  
     int recordPerPage = 3; // 한페이지당 출력할 레코드 갯수
  
-    String paging = Utility.rpaging(total, nowPage, recordPerPage, col, word, url, nPage);
+    String paging = Utility.rpaging(total, recordPerPage, col, word, url, nPage);
  
     return new ResponseEntity<>(paging, HttpStatus.OK);
  
   }
   
-  @PostMapping("/contents/reply/create")
+  @PostMapping("/contents/review/create")
   public ResponseEntity<String> create(@RequestBody ReplyDTO vo) {
  
     log.info("ReplyDTO1: " + vo.getContent());
@@ -76,7 +76,7 @@ public class ReplyController {
         : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
   
-  @GetMapping("/reply/{rnum}")
+  @GetMapping("/review/{rnum}")
   public ResponseEntity<ReplyDTO> get(@PathVariable("rnum") int rnum) {
  
     log.info("get: " + rnum);
@@ -84,7 +84,7 @@ public class ReplyController {
     return new ResponseEntity<>(service.read(rnum), HttpStatus.OK);
   }
   
-  @PutMapping("/reply/")
+  @PutMapping("/review/")
   public ResponseEntity<String> modify(@RequestBody ReplyDTO vo) {
  
     log.info("modify: " + vo);
@@ -94,7 +94,7 @@ public class ReplyController {
  
   }
  
-  @DeleteMapping("/reply/{rnum}")
+  @DeleteMapping("/review/{rnum}")
   public ResponseEntity<String> remove(@PathVariable("rnum") int rnum) {
  
     log.info("remove: " + rnum);

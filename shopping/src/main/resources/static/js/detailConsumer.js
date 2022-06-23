@@ -29,8 +29,8 @@ function replaceAll(str, searchStr, replaceStr) {
 
 let param = '';
     param = "nPage=" + nPage;
-    param += "&nowPage=" + nowPage;
-    param += "&contents=" + contents;
+	
+    param += "&contentsno=" + contentsno;
     param += "&col=" + colx;
     param += "&word=" + wordx;
  
@@ -56,26 +56,34 @@ $("#modalCloseBtn").on("click", function (e) {
 });
   
 $("#addReplyBtn").on("click", function (e) {
-  modalInputContent.val("");
-  modal.find("button[id !='modalCloseBtn']").hide();
- 
-  modalRegisterBtn.show();
- 
-  $(".modal").modal("show");
- 
+	
+ if(id == null || id == ""){
+		if(confirm("로그인이 필요합니다. ")){
+			let url = "/member/login?rurl=/contents/detail/"+contentsno+"&"+param;
+			location.href=url;
+			return;
+		}
+	}else{
+	  modalInputContent.val("");
+	  modal.find("button[id !='modalCloseBtn']").hide();
+	 
+	  modalRegisterBtn.show();
+	 
+	  $(".modal").modal("show");
+ 	}
 });
  
 modalRegisterBtn.on("click", function (e) {
  
   if (modalInputContent.val() == '') {
-    alert("댓글을 입력하세요")
+    alert("리뷰를 입력하세요")
     return;
   }
  
   let reply = {
     content: modalInputContent.val(),
     id: 'user1',
-    bbsno: bbsno
+    contentsno: contentsno
   };
   add(reply)
     .then(result => {
@@ -127,11 +135,24 @@ modalModBtn.on("click", function (e) {
 modalRemoveBtn.on("click", function (e) {
  
   let rnum = modal.data("rnum"); 
-  remove(rnum)
+  if(id != dto.id){
+  
+  confirm("본인 리뷰만 삭제 가능합니다.")
+			let url = "/member/contents/detail/"+contentsno;
+			location.href=url;
+			
+  
+ }else{
+	
+			
+			remove(rnum)
     .then(result => {
       modal.modal("hide");
       showList();
       showPage();
+      return;
     });
- 
+			
+
+}
 });//remove

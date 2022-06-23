@@ -1,7 +1,7 @@
 package com.study.contents;
 public class ReplyDTO {
   private int rnum;
-  private String content;
+  private String contents;
   private String regdate;
   private String id;
   private int contentsno;
@@ -12,10 +12,10 @@ public class ReplyDTO {
     this.rnum = rnum;
   }
   public String getContent() {
-    return content;
+    return contents;
   }
-  public void setContent(String content) {
-    this.content = content;
+  public void setContent(String contents) {
+    this.contents = contents;
   }
   public String getRegdate() {
     return regdate;

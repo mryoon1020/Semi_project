@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("com.study.model.ReplyServiceImpl")
+@Service("com.study.contents.ReplyServiceImpl")
 public class ReplyServiceImpl implements ReplyService {
 
   @Autowired

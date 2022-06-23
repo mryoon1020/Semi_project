@@ -217,7 +217,7 @@ public class Utility {
 
   }
 
-  public static String rpaging(int total, int nowPage, int recordPerPage, String col, String word, String url,
+  public static String rpaging(int total, int recordPerPage, String col, String word, String url,
       int nPage) {
     int pagePerBlock = 5; // 블럭당 페이지 수
     int totalPage = (int) (Math.ceil((double) total / recordPerPage)); // 전체 페이지
@@ -232,7 +232,7 @@ public class Utility {
     int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 
     if (nowGrp >= 2) {
-      str.append("<li><a href='" + url + "?col=" + col + "&word=" + word + "&nowPage=" + nowPage + "&nPage=" + _nowPage
+      str.append("<li><a href='" + url + "?col=" + col + "&word=" + word + "&nPage=" + _nowPage
           + "'>이전</A></li>");
     }
 
@@ -244,14 +244,14 @@ public class Utility {
       if (nPage == i) {
         str.append("<li class='active'><a href=#>" + i + "</a></li>");
       } else {
-        str.append("<li><a href='" + url + "?col=" + col + "&word=" + word + "&nowPage=" + nowPage + "&nPage=" + i
+        str.append("<li><a href='" + url + "?col=" + col + "&word=" + word + "&nPage=" + i
             + "'>" + i + "</A></li>");
       }
     }
 
     _nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
     if (nowGrp < totalGrp) {
-      str.append("<li><A href='" + url + "?col=" + col + "&word=" + word + "&nowPage=" + nowPage + "&nPage=" + _nowPage
+      str.append("<li><A href='" + url + "?col=" + col + "&word=" + word + "&nPage=" + _nowPage
           + "'>다음</A></li>");
     }
     str.append("</ul>");
