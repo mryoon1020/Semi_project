@@ -52,7 +52,7 @@
     <button type="submit" class="btn btn-default" >검색</button>
     <c:choose>
     <c:when test="${sessionScope.grade == 'A'}">
-    <button type="button" class="btn btn-default" onclick="location.href='./create'">등록</button>
+    <button type="button" class="btn btn-default" onclick="location.href='${root}/admin/notice/create'">등록</button>
   </c:when>
   </c:choose>
   </form>

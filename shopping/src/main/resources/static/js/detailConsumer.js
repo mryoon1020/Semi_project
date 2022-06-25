@@ -82,7 +82,7 @@ modalRegisterBtn.on("click", function (e) {
  
   let reply = {
     content: modalInputContent.val(),
-    id: 'user1',
+    id: id,
     contentsno: contentsno
   };
   add(reply)
@@ -121,38 +121,62 @@ $(".chat").on("click", "li", function (e) {
  //댓글 수정
 modalModBtn.on("click", function (e) {
  
-  let reply = { rnum: modal.data("rnum"), content: modalInputContent.val() };
+  let reply = { rnum: modal.data("rnum"), content: modalInputContent.val()};
+  
+  let rnum = $(this)
+  
+  let rid = get(reply).then(reply =>{text(
+	
+	 modal.data("id", reply.id)); 
+
+});
+
+  alert(rid)
+  if(rid == id || id == "admin"){
+	
   update(reply)
     .then(result => {
       modal.modal("hide");
       showList();
       showPage();
     });
- 
+    
+  }else if(id == null || id == "" || rid != id){
+		if(confirm("본인의 리뷰만 수정할수 있습니다.\n확인을 누르면 로그인 화면으로 이동합니다. ")){			
+			let url = "/member/login?rurl=/contents/detail/"+contentsno+"&"+param;
+			location.href=url;
+			return;
+			}
+		
+	}
+  
 });//modify
  
 //댓글 삭제
 modalRemoveBtn.on("click", function (e) {
  
   let rnum = modal.data("rnum"); 
-  if(id != dto.id){
+  let rid = modal.data("id")
   
-  confirm("본인 리뷰만 삭제 가능합니다.")
-			let url = "/member/contents/detail/"+contentsno;
-			location.href=url;
-			
+  alert(rid)
+  alert(id)
   
- }else{
-	
+  if(rid == id || id == "admin"){	
 			
-			remove(rnum)
+remove(rnum)
     .then(result => {
       modal.modal("hide");
       showList();
       showPage();
       return;
     });
-			
+    
+	}else if(id == null || id == "" || rid != id){
+		if(confirm("본인의 리뷰만 삭제할수 있습니다.\n확인을 누르면 로그인 화면으로 이동합니다. ")){			
+			let url = "/member/login?rurl=/contents/detail/"+contentsno+"&"+param;
+			location.href=url;
+			return;
+			}		
 
 }
 });//remove

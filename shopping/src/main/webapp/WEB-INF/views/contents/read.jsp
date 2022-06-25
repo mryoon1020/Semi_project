@@ -6,19 +6,14 @@
   <meta charset="utf-8">
   <script>
   	function list(){
-  		let url = '/contents/list';
+  		let url = '/admin/contents/list';
   		url += "?nowPage=${param.nowPage}";
   		url += "&col=${param.col}";
   		url += "&word=${param.word}";
   		location.href = url;
   	}
   	function update(){ //수정페이지 이동
-  		let url = '/contents/update/${dto.contentsno}';
-  		location.href = url;
-  	}
-  	
-  	function reply(){ //답변페이지 이동
-  		let url = '/contents/reply/${dto.contentsno}';
+  		let url = '/admin/contents/update/${dto.contentsno}';
   		location.href = url;
   	}
   	
@@ -44,7 +39,7 @@
 	<div class="panel-body">${dto.filename}</div>
 </div>
 <div>
-	<button onclick="location.href='/contents/create'">등록</button>
+	<button onclick="location.href='/admin/contents/create'">등록</button>
 	<button onclick="update()">수정</button>
 	<button onclick="list()">목록</button>
 	
