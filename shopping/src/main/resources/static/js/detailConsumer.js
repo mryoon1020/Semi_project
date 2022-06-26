@@ -64,6 +64,7 @@ $("#addReplyBtn").on("click", function (e) {
 			return;
 		}
 	}else{
+	  modalInputId.val(id);
 	  modalInputContent.val("");
 	  modal.find("button[id !='modalCloseBtn']").hide();
 	 

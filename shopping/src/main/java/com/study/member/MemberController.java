@@ -311,6 +311,20 @@ public class MemberController {
     return "/member/create";
   }
   
+  @GetMapping("/member/read")
+  public String mypage(String id, Model model) {
+     
+    MemberDTO dto = service.read(id);
+    
+    
+    
+    model.addAttribute("dto",dto);
+    
+    return "/member/read";
+   
+ 
+  }
+  
   @PostMapping("/getId")
   @ResponseBody
   public String getId(@RequestBody Map<String, String> map) {
