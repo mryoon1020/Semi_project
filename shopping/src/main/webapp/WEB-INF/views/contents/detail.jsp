@@ -146,6 +146,8 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     </div>
     <div class="modal-body">
       <div class="form-group">
+      	<label>작성자</label> 
+        <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled name='id'>
         <label>내용</label> 
         <textarea cols="10" rows="3" class="form-control" name='content'>New Reply!!!!</textarea> 
       </div>      

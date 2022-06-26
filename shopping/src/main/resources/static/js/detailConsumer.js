@@ -46,7 +46,7 @@ function showPage(){
 
 let modal = $(".modal");
 let modalInputContent = modal.find("textarea[name='content']");
- 
+let modalInputId = modal.find("input[name='id']"); 
 let modalModBtn = $("#modalModBtn");
 let modalRemoveBtn = $("#modalRemoveBtn");
 let modalRegisterBtn = $("#modalRegisterBtn");
@@ -105,7 +105,10 @@ $(".chat").on("click", "li", function (e) {
    get(rnum)
     .then(reply => {
  
+ 	  
       modalInputContent.val(reply.content);
+      modalInputId.val(reply.id);
+      
       modal.data("rnum", reply.rnum);
  
       modal.find("button[id !='modalCloseBtn']").hide();
@@ -123,15 +126,11 @@ modalModBtn.on("click", function (e) {
  
   let reply = { rnum: modal.data("rnum"), content: modalInputContent.val()};
   
-  let rnum = $(this)
+	let rid = modalInputId.val()
   
-  let rid = get(reply).then(reply =>{text(
-	
-	 modal.data("id", reply.id)); 
+//	alert(id);
+//	alert(rid);
 
-});
-
-  alert(rid)
   if(rid == id || id == "admin"){
 	
   update(reply)
@@ -156,10 +155,10 @@ modalModBtn.on("click", function (e) {
 modalRemoveBtn.on("click", function (e) {
  
   let rnum = modal.data("rnum"); 
-  let rid = modal.data("id")
+  let rid = modalInputId.val()
   
-  alert(rid)
-  alert(id)
+//  alert(rid)
+//  alert(id)
   
   if(rid == id || id == "admin"){	
 			
